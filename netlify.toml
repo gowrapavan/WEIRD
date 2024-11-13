@@ -1,0 +1,35 @@
+[build]
+  command = "npm install && npm run build"
+  publish = "public"
+
+[context.production.environment]
+  NODE_VERSION       = "v20.11.0"
+  NPM_VERSION        = "10.2.4"
+  FIREBASE_VERSION   = "11.0.1"
+
+[context.split1]
+  command = "npm install && npm run build"
+
+  [context.split1.environment]
+    NODE_VERSION = "v20.11.0"
+    NPM_VERSION  = "10.2.4"
+    FIREBASE_VERSION = "11.0.1"
+
+[context.deploy-preview]
+  command = "npm install && npm run build --buildFuture -b $DEPLOY_PRIME_URL"
+
+  [context.deploy-preview.environment]
+    NODE_VERSION = "v20.11.0"
+    NPM_VERSION  = "10.2.4"
+    FIREBASE_VERSION = "11.0.1"
+
+[context.branch-deploy]
+  command = "npm install && npm run build -b $DEPLOY_PRIME_URL"
+
+  [context.branch-deploy.environment]
+    NODE_VERSION = "v20.11.0"
+    NPM_VERSION  = "10.2.4"
+    FIREBASE_VERSION = "11.0.1"
+
+[context.next.environment]
+  FIREBASE_VERSION = "11.0.1"
