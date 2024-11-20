@@ -76,11 +76,7 @@ export function LiveMatch() {
           <div className="absolute top-0 left-0 w-full h-full">
             <iframe
               className="w-full h-full"
-<<<<<<< HEAD
-              src="https://2kora.naba24.net/albaplayer/bn2/?serv=1"
-=======
               src="https://2kora.naba24.net/albaplayer/bn5/?serv=2"
->>>>>>> 394053d290ca4edaa1f1e0bbacaa21d63e6f8fb1
               allowFullScreen
             />
             <div className="absolute bottom-0 left-0 right-0 p-2 sm:p-4 bg-gradient-to-t from-black/80 to-transparent">
