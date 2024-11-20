@@ -107,3 +107,196 @@ const post = {
 3. Implement error boundaries for embed failures
 4. Clean up embed scripts on component unmount
 5. Use proper TypeScript types for all props
+
+
+
+
+
+
+
+
+
+
+
+
+# WEIRD Platform Documentation
+
+## Firebase Setup and Authentication
+
+### Initial Setup
+
+1. Create a Firebase project at [Firebase Console](https://console.firebase.google.com)
+2. Enable Authentication, Firestore, and Storage services
+3. Add your web application to get the configuration
+
+### Configuration
+
+The Firebase configuration is stored in `src/config/firebase.ts`:
+
+```typescript
+const firebaseConfig = {
+  apiKey: "your-api-key",
+  authDomain: "your-app.firebaseapp.com",
+  projectId: "your-app",
+  storageBucket: "your-app.appspot.com",
+  messagingSenderId: "your-sender-id",
+  appId: "your-app-id",
+  measurementId: "your-measurement-id"
+};
+```
+
+### Authentication Setup
+
+1. Enable Email/Password authentication in Firebase Console:
+   - Go to Authentication > Sign-in methods
+   - Enable Email/Password provider
+
+2. Implement authentication in your app:
+   ```typescript
+   import { auth } from '../config/firebase';
+   import { signInWithEmailAndPassword } from 'firebase/auth';
+
+   // Sign in
+   await signInWithEmailAndPassword(auth, email, password);
+
+   // Sign out
+   await auth.signOut();
+   ```
+
+### Email Verification
+
+1. Enable email verification in Firebase Console
+2. Send verification email after registration:
+   ```typescript
+   import { sendEmailVerification } from 'firebase/auth';
+
+   await sendEmailVerification(auth.currentUser);
+   ```
+
+### Password Reset
+
+1. Implement password reset functionality:
+   ```typescript
+   import { sendPasswordResetEmail } from 'firebase/auth';
+
+   await sendPasswordResetEmail(auth, email);
+   ```
+
+### Security Rules
+
+1. Set up Firestore security rules:
+   ```javascript
+   rules_version = '2';
+   service cloud.firestore {
+     match /databases/{database}/documents {
+       match /users/{userId} {
+         allow read: if request.auth != null;
+         allow write: if request.auth.uid == userId;
+       }
+     }
+   }
+   ```
+
+2. Set up Storage security rules:
+   ```javascript
+   rules_version = '2';
+   service firebase.storage {
+     match /b/{bucket}/o {
+       match /avatars/{userId} {
+         allow read: if request.auth != null;
+         allow write: if request.auth.uid == userId;
+       }
+     }
+   }
+   ```
+
+### Best Practices
+
+1. **Error Handling**
+   - Always wrap Firebase operations in try-catch blocks
+   - Provide user-friendly error messages
+   - Log errors for debugging
+
+2. **State Management**
+   - Use React Context or state management libraries for auth state
+   - Implement loading states for async operations
+   - Handle offline scenarios
+
+3. **Security**
+   - Never expose Firebase config in client-side code
+   - Implement proper security rules
+   - Use environment variables for sensitive data
+
+4. **Performance**
+   - Enable offline persistence for Firestore
+   - Implement proper data pagination
+   - Use appropriate Firebase SDK features
+
+### Example Usage
+
+```typescript
+// Sign up
+const signUp = async (email: string, password: string) => {
+  try {
+    const { user } = await createUserWithEmailAndPassword(auth, email, password);
+    await sendEmailVerification(user);
+    
+    // Create user profile
+    await setDoc(doc(db, 'users', user.uid), {
+      email: user.email,
+      createdAt: new Date().toISOString(),
+    });
+    
+    return user;
+  } catch (error) {
+    console.error('Error signing up:', error);
+    throw error;
+  }
+};
+
+// Sign in
+const signIn = async (email: string, password: string) => {
+  try {
+    const { user } = await signInWithEmailAndPassword(auth, email, password);
+    return user;
+  } catch (error) {
+    console.error('Error signing in:', error);
+    throw error;
+  }
+};
+
+// Reset password
+const resetPassword = async (email: string) => {
+  try {
+    await sendPasswordResetEmail(auth, email);
+  } catch (error) {
+    console.error('Error resetting password:', error);
+    throw error;
+  }
+};
+```
+
+## Troubleshooting
+
+### Common Issues
+
+1. **Authentication Errors**
+   - Check if email verification is required
+   - Verify correct email/password combination
+   - Check if the user account exists
+
+2. **Security Rules**
+   - Verify security rules are properly configured
+   - Check if user is authenticated
+   - Ensure proper permissions for operations
+
+3. **Offline Support**
+   - Enable persistence for offline support
+   - Handle offline scenarios gracefully
+   - Implement proper error handling
+
+### Support
+
+For additional support:
+- [Firebase Documentation](https://firebase.google.com/docs)
+- [Firebase Support](https://firebase.google.com/support)

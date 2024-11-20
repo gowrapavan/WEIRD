@@ -52,7 +52,7 @@ interface SocialStore {
           'https://scontent.cdninstagram.com/v/t51.2885-19/447519004_1938646279939307_7197080482607600566_n.jpg?stp=cp0_dst-jpg_s110x80&_nc_cat=1&ccb=1-7&_nc_sid=bf7eb4&_nc_ohc=KGLnvUDhcJ4Q7kNvgEo8rtN&_nc_zt=24&_nc_ht=scontent.cdninstagram.com&oh=00_AYCn1tjDVkAruG91RrOya4FGoJT4LKdE7Q2sINVqfmNa_Q&oe=673A46E9',
       },
       content: 'Match highlights from yesterday! 🎮',
-      embedId: '5UqROGX6dU8?si=FP6r_2t34Pzym0zZ', // Video ID for embedding
+      embedId: 'DvaPazAX7lw', // Video ID for embedding
       timestamp: '4 hours ago',
       likes: 856,
       comments: 134,
@@ -76,7 +76,23 @@ interface SocialStore {
     },
 */
 export const useSocialStore = create<SocialStore>((set) => ({
-  posts: [ //last post id is 4 IN is 8
+  posts: [ //last post id is 5 IN is 9
+    {
+      id: 5,
+      platform: 'youtube',
+      identityNumber: 9,
+      author: {
+        name: 'ISHOWSPEED',
+        avatar:
+          'https://yt3.ggpht.com/_Mj_eHbehGaSOe8yi57I_b99kagnBcFNuWvgtM64eqqmZZ4jLRzhvCAkfakuZL-QswRXM3xNew=s48-c-k-c0x00ffffff-no-rj',
+       },
+      content: 'NOT ENDING UNTIL I LAND A DOUBLE BACKFLIP....! 🎮',
+      embedId: 'DvaPazAX7lw', // Video ID for embedding
+      timestamp: '4 hours ago',
+      likes: 85852 ,
+      comments: 12134,
+      shares: 21,
+    },
 
     {
       id: 4,
