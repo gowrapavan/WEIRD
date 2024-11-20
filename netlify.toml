@@ -21,3 +21,12 @@
   [context.branch-deploy.environment]
   NODE_VERSION = "v20.11.0"
   NPM_VERSION  = "10.2.4"
+
+[build]
+  publish = "dist"
+  command = "npm run build"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
