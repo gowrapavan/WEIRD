@@ -1,22 +1,7 @@
 import React from 'react';
 import { LiveMatch } from '../components/LiveMatch';
 
-interface Match {
-  league: string;
-  views: string;
-  isLive: boolean;
-  homeImg: string;
-  homeName: string;
-  awayImg: string;
-  awayName: string;
-  score: string;
-  src: string;
-  vidsrc: string;
-  date: string;
-  time: string;
-}
-
-const matches: Match[] = [
+const matches = [
   {
     league: 'Premier League',
     views: '10.5K',
@@ -34,53 +19,37 @@ const matches: Match[] = [
   {
     league: 'La Liga',
     views: '8.2K',
-    isLive: false,
-    homeImg: '/images/team3.png',
-    homeName: 'Real Madrid',
-    awayImg: '/images/team4.png',
-    awayName: 'Barcelona',
+    isLive: Live,
+    homeImg: 'https://ssl.gstatic.com/onebox/media/sports/logos/Id84F7Ji9rZGVacaazlBYA_96x96.png',
+    homeName: 'CD Leganés',
+    awayImg: 'https://ssl.gstatic.com/onebox/media/sports/logos/Th4fAVAZeCJWRcKoLW7koA_96x96.png',
+    awayName: 'Real Madrid',
     score: '2 - 2',
-    src: '/images/match2.jpg',
-    vidsrc: 'https://2kora.naba24.net/albaplayer/bein-pemium-3hd/?serv=0',
+    src: 'https://cdn.ratingbet.com/ratingbet/20241122/8e50465877afd24dd3de41197544b08cbfaf9cdd86756dd1d163ad0e5639a7e1-800-500.jpg',
+    vidsrc: 'https://2kora.naba24.net/albaplayer/bn3/?serv=0',
     date: '24 Nov 2024',
-    time: '10:30 PM',
+    time: '11:0 PM',
   },
-  {
-    league: 'Serie A',
-    views: '6.7K',
-    isLive: true,
-    homeImg: '/images/team5.png',
-    homeName: 'AC Milan',
-    awayImg: '/images/team6.png',
-    awayName: 'Juventus',
-    score: '0 - 1',
-    src: '/images/match3.jpg',
-    vidsrc: 'https://example.com/match3',
-    date: '24 Nov 2024',
-    time: '20:45 PM',
-  },
+  // Add more match objects if needed
 ];
 
 export function LiveMatches() {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      {matches.map((match, index) => (
-        <LiveMatch
-          key={index}
-          league={match.league}
-          views={match.views}
-          isLive={match.isLive}
-          homeImg={match.homeImg}
-          homeName={match.homeName}
-          awayImg={match.awayImg}
-          awayName={match.awayName}
-          score={match.score}
-          src={match.src}
-          vidsrc={match.vidsrc}
-          date={match.date}
-          time={match.time}
-        />
-      ))}
+    <div className="flex-1">
+      <div className="mb-6 bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg">
+        <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+          Live Matches
+        </h1>
+        <p className="text-gray-600 dark:text-gray-400">
+          Watch ongoing tournaments and matches
+        </p>
+      </div>
+
+      <div className="grid gap-6">
+        {matches.map((match, index) => (
+          <LiveMatch key={index} {...match} />
+        ))}
+      </div>
     </div>
   );
 }
