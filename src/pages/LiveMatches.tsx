@@ -1,5 +1,5 @@
 import React from 'react';
-import { LiveMatch } from './LiveMatch';
+import { LiveMatch } from '../components/LiveMatch';
 
 interface Match {
   league: string;
