@@ -19,7 +19,7 @@ const matches = [
   {
     league: 'La Liga',
     views: '8.2K',
-    isLive: Live,
+    isLive: true,
     homeImg: 'https://ssl.gstatic.com/onebox/media/sports/logos/Id84F7Ji9rZGVacaazlBYA_96x96.png',
     homeName: 'CD Leganés',
     awayImg: 'https://ssl.gstatic.com/onebox/media/sports/logos/Th4fAVAZeCJWRcKoLW7koA_96x96.png',
