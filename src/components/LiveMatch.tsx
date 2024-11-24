@@ -1,6 +1,3 @@
-import React, { useState } from 'react';
-import { Play, Users, X, Volume2, Maximize2 } from 'lucide-react';
-
 interface LiveMatchProps {
   league: string;
   views: string;
@@ -11,7 +8,9 @@ interface LiveMatchProps {
   awayName: string;
   score: string;
   src: string;
-  vidsrc: string; // Added vidsrc for iframe source
+  vidsrc: string; // Add vidsrc prop for iframe source
+  date: string;   // Add date prop
+  time: string;   // Add time prop
 }
 
 export function LiveMatch({
@@ -24,7 +23,9 @@ export function LiveMatch({
   awayName,
   score,
   src,
-  vidsrc, // Added vidsrc prop
+  vidsrc,
+  date,     // Destructure date
+  time,     // Destructure time
 }: LiveMatchProps) {
   const [isWatching, setIsWatching] = useState(false);
 
@@ -40,11 +41,7 @@ export function LiveMatch({
         <div className="absolute bottom-4 left-4 right-4 text-white">
           <div className="flex items-center justify-between mb-2">
             <div className="flex items-center space-x-2">
-              <span
-                className={`flex items-center px-2 py-1 rounded-full text-sm ${
-                  isLive ? 'bg-green-600' : 'bg-red-600'
-                }`}
-              >
+              <span className={`flex items-center px-2 py-1 rounded-full text-sm ${isLive ? 'bg-green-600' : 'bg-red-600'}`}>
                 <span
                   className={`animate-pulse w-2 h-2 rounded-full mr-2 ${
                     isLive ? 'bg-white' : 'bg-gray-400'
@@ -59,9 +56,8 @@ export function LiveMatch({
             </div>
           </div>
           <h2 className="text-lg sm:text-xl font-bold">{league}</h2>
-          <p className="text-sm text-gray-200">
-            {homeName} vs {awayName}
-          </p>
+          <p className="text-sm text-gray-200">{homeName} vs {awayName}</p>
+          <p className="text-sm text-gray-400">{date} - {time}</p> {/* Display date and time */}
         </div>
       </div>
 
@@ -74,9 +70,7 @@ export function LiveMatch({
                 alt={homeName}
                 className="w-10 h-10 sm:w-12 sm:h-12 rounded-full"
               />
-              <span className="text-sm font-medium dark:text-gray-200">
-                {homeName}
-              </span>
+              <span className="text-sm font-medium dark:text-gray-200">{homeName}</span>
             </div>
             <div className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">
               {score}
@@ -87,9 +81,7 @@ export function LiveMatch({
                 alt={awayName}
                 className="w-10 h-10 sm:w-12 sm:h-12 rounded-full"
               />
-              <span className="text-sm font-medium dark:text-gray-200">
-                {awayName}
-              </span>
+              <span className="text-sm font-medium dark:text-gray-200">{awayName}</span>
             </div>
           </div>
           <button
@@ -116,7 +108,7 @@ export function LiveMatch({
           <div className="absolute top-0 left-0 w-full h-full">
             <iframe
               className="w-full h-full"
-              src={vidsrc} // Dynamically set iframe source
+              src={vidsrc} // Use vidsrc prop dynamically
               allowFullScreen
             />
             <div className="absolute bottom-0 left-0 right-0 p-2 sm:p-4 bg-gradient-to-t from-black/80 to-transparent">
