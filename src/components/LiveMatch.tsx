@@ -1,14 +1,36 @@
 import React, { useState } from 'react';
 import { Play, Users, X, Volume2, Maximize2 } from 'lucide-react';
 
-export function LiveMatch() {
+interface LiveMatchProps {
+  league: string;
+  views: string;
+  isLive: boolean;
+  homeImg: string;
+  homeName: string;
+  awayImg: string;
+  awayName: string;
+  score: string;
+  src: string;
+}
+
+export function LiveMatch({
+  league,
+  views,
+  isLive,
+  homeImg,
+  homeName,
+  awayImg,
+  awayName,
+  score,
+  src,
+}: LiveMatchProps) {
   const [isWatching, setIsWatching] = useState(false);
 
   return (
     <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden mb-6">
       <div className="relative">
         <img
-          src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&q=80&w=1200"
+          src={src}
           alt="Live match"
           className="w-full h-48 sm:h-64 object-cover"
         />
@@ -16,43 +38,49 @@ export function LiveMatch() {
         <div className="absolute bottom-4 left-4 right-4 text-white">
           <div className="flex items-center justify-between mb-2">
             <div className="flex items-center space-x-2">
-              <span className="flex items-center px-2 py-1 bg-red-600 rounded-full text-sm">
-                <span className="animate-pulse w-2 h-2 bg-white rounded-full mr-2" />
-                NOT LIVE
+              <span className={`flex items-center px-2 py-1 rounded-full text-sm ${isLive ? 'bg-green-600' : 'bg-red-600'}`}>
+                <span
+                  className={`animate-pulse w-2 h-2 rounded-full mr-2 ${
+                    isLive ? 'bg-white' : 'bg-gray-400'
+                  }`}
+                />
+                {isLive ? 'LIVE' : 'NOT LIVE'}
               </span>
               <span className="flex items-center text-sm">
                 <Users className="w-4 h-4 mr-1" />
-                27.5K
+                {views}
               </span>
             </div>
           </div>
-          <h2 className="text-lg sm:text-xl font-bold">Nations League · Fri, 15 Nov, 1:15 am</h2>
-          <p className="text-sm text-gray-200">Greece vs England</p>
+          <h2 className="text-lg sm:text-xl font-bold">{league}</h2>
+          <p className="text-sm text-gray-200">{homeName} vs {awayName}</p>
         </div>
       </div>
-      
+
       <div className="p-4">
         <div className="flex justify-between items-center">
           <div className="flex items-center space-x-4">
             <div className="text-center">
               <img
-                src="https://ssl.gstatic.com/onebox/media/sports/logos/Id84F7Ji9rZGVacaazlBYA_96x96.png"
-                alt="Team Alpha"
+                src={homeImg}
+                alt={homeName}
                 className="w-10 h-10 sm:w-12 sm:h-12 rounded-full"
               />
-              <span className="text-sm font-medium dark:text-gray-200">Leganes</span>
+              <span className="text-sm font-medium dark:text-gray-200">{homeName}</span>
             </div>
-            <div className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">0 - 0</div>
+            <div className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">
+              {score}
+            </div>
             <div className="text-center">
               <img
-                src="https://ssl.gstatic.com/onebox/media/sports/logos/Th4fAVAZeCJWRcKoLW7koA_96x96.png"
-                alt="Team Omega"
+                src={awayImg}
+                alt={awayName}
                 className="w-10 h-10 sm:w-12 sm:h-12 rounded-full"
               />
-              <span className="text-sm font-medium dark:text-gray-200">Real Madrid</span>
+              <span className="text-sm font-medium dark:text-gray-200">{awayName}</span>
             </div>
           </div>
-          <button 
+          <button
             onClick={() => setIsWatching(!isWatching)}
             className="flex items-center px-3 py-1.5 sm:px-4 sm:py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition text-sm sm:text-base"
           >
@@ -97,5 +125,3 @@ export function LiveMatch() {
     </div>
   );
 }
-
-
