@@ -30,6 +30,20 @@ const matches = [
     date: '24 Nov 2024',
     time: '11:0 PM',
   },
+  {
+    league: 'La Liga',
+    views: '8.2K',
+    isLive: true,
+    homeImg: 'https://ssl.gstatic.com/onebox/media/sports/logos/Id84F7Ji9rZGVacaazlBYA_96x96.png',
+    homeName: 'CD Leganés',
+    awayImg: 'https://ssl.gstatic.com/onebox/media/sports/logos/Th4fAVAZeCJWRcKoLW7koA_96x96.png',
+    awayName: 'Real Madrid',
+    score: '2 - 2',
+    src: 'https://cdn.ratingbet.com/ratingbet/20241122/8e50465877afd24dd3de41197544b08cbfaf9cdd86756dd1d163ad0e5639a7e1-800-500.jpg',
+    vidsrc: 'https://2kora.naba24.net/albaplayer/bn3/?serv=0',
+    date: '24 Nov 2024',
+    time: '11:0 PM',
+  },
   // Add more match objects if needed
 ];
 
@@ -54,5 +68,3 @@ export function LiveMatches() {
   );
 }
 
-
-<br><br>
